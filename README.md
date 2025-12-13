@@ -58,7 +58,7 @@ Place your resume PDF as `public/resume.pdf`
 
 ## 📁 Project Structure
 
-\`\`\`
+```bash
 ├── app/
 │   ├── layout.tsx          # Root layout with metadata
 │   ├── page.tsx            # Main portfolio page
@@ -77,7 +77,7 @@ Place your resume PDF as `public/resume.pdf`
 │   │   └── scroll-to-top.tsx
 │   └── ui/                 # Reusable UI components
 └── public/                 # Static assets
-\`\`\`
+```
 
 ## 🚀 Deployment
 
