@@ -42,3 +42,4 @@ coverage/
 
 # Public uploads
 public/*.pdf
+!public/TejasKapse_Resume.pdf
