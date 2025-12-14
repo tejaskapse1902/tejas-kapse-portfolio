@@ -4,18 +4,20 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { GraduationCap, Calendar, Award } from "lucide-react"
+import { GraduationCap, Calendar, Award, School } from "lucide-react"
 
 const education = [
   {
     degree: "Master of Computer Applications (MCA)",
     institution: "Savitribai Phule Pune University",
+    college: "Progressive Education Society's Modern Institute Business Studies, Pune.",
     period: "2023 - 2025",
     description: "Specialized in Advanced Software Development, Machine Learning, and Database Management Systems",
   },
   {
     degree: "Bachelor of Science in Information Technology",
     institution: "Rashtrasant Tukadoji Maharaj Nagpur University",
+    college: "Dr. S. C. Prerna College of Commerce, Science and Arts, Nagpur.",
     period: "2020 - 2023",
     description: "Foundation in Programming, Web Development, and Computer Science fundamentals",
   },
@@ -59,9 +61,17 @@ export function Education() {
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-foreground mb-2 text-balance">{edu.degree}</h3>
-                          <div className="flex items-center gap-2 text-primary font-semibold mb-2">
-                            <Award className="h-4 w-4" />
-                            <span className="text-balance">{edu.institution}</span>
+                          <div className="flex flex-col gap-1 mb-2">
+                            <div className="flex items-center gap-2 text-primary font-semibold">
+                              <Award className="h-4 w-4" />
+                              <span className="text-balance">{edu.institution}</span>
+                            </div>
+                            {edu.college && (
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <School className="h-4 w-4" />
+                                <span className="text-muted-foreground">{edu.college}</span>
+                              </div>
+                            )}
                           </div>
                           <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
                             <Calendar className="h-4 w-4" />

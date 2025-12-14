@@ -10,7 +10,7 @@ const geist = Geist({ subsets: ["latin"] })
 const geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Tejas Kapse - Full Stack Developer | Portfolio",
+  title: "Tejas Kapse - Python Devloper | Full Stack Developer | Portfolio",
   description:
     "Portfolio of Tejas Kapse - Full Stack Developer, Python Developer, and Backend Engineer. Showcasing projects in React, Python, Machine Learning, and modern web technologies.",
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   creator: "Tejas Kapse",
   openGraph: {
     type: "website",
-    title: "Tejas Kapse - Full Stack Developer Portfolio",
+    title: "Tejas Kapse - Python Devloper, Full Stack Developer Portfolio",
     description: "Explore projects and experience in full-stack development, Python, and machine learning.",
     siteName: "Tejas Kapse Portfolio",
   },
@@ -40,10 +40,6 @@ export const metadata: Metadata = {
       {
         url: "/icon-dark-32x32.png",
         media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
       },
     ],
     apple: "/apple-icon.png",

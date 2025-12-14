@@ -62,6 +62,9 @@ export function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
 
+  const majorProjects = projects.slice(0, 3)
+  const miniProjects = projects.slice(3)
+
   return (
     <section id="projects" ref={ref} className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -77,61 +80,112 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden">
-                <div className="h-40 w-full overflow-hidden">
-                  <img
-                    src={`/images/project-${(index % 3) + 1}.svg`}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardContent className="flex-1 flex flex-col justify-between p-6">
-                  <div>
-                    <h3 className="text-xl font-semibold text-balance group-hover:text-primary transition-colors mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
+        <div className="max-w-6xl mx-auto">
+          {/* Major Projects */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-foreground mb-4">Major Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {majorProjects.map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden">
+                    <div className="h-40 w-full overflow-hidden">
+                      <img
+                        src={`/images/project-${(index % 3) + 1}.svg`}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 bg-transparent"
-                      onClick={() => window.open(project.github, "_blank")}
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      Code
-                    </Button>
-                    {project.demo && (
-                      <Button
-                        size="sm"
-                        className="flex-1 bg-primary hover:bg-primary/90"
-                        onClick={() => window.open(project.demo, "_blank")}
-                      >
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        Demo
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                    <CardContent className="flex-1 flex flex-col justify-between p-6">
+                      <div>
+                        <h3 className="text-xl font-semibold text-balance group-hover:text-primary transition-colors mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{project.description}</p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tech.map((tech) => (
+                            <Badge key={tech} variant="secondary" className="text-xs">
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 bg-transparent"
+                          onClick={() => window.open(project.github, "_blank")}
+                        >
+                          <Github className="mr-2 h-4 w-4" />
+                          Code
+                        </Button>
+                        {project.demo && (
+                          <Button
+                            size="sm"
+                            className="flex-1 bg-primary hover:bg-primary/90"
+                            onClick={() => window.open(project.demo, "_blank")}
+                          >
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Demo
+                          </Button>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mini Projects */}
+          <div>
+            <h3 className="text-2xl font-semibold text-foreground mb-4">Mini Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {miniProjects.map((project, index) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                >
+                  <Card className="border-none shadow-md hover:shadow-lg transition-all duration-200 h-full flex flex-col group overflow-hidden">
+                    <div className="h-32 w-full overflow-hidden">
+                      <img
+                        src={`/images/project-${((index + 3) % 3) + 1}.svg`}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <CardContent className="flex-1 flex flex-col justify-between p-4">
+                      <div>
+                        <h4 className="text-lg font-semibold text-balance group-hover:text-primary transition-colors mb-1">
+                          {project.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-3">{project.description}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" className="flex-1 bg-transparent" onClick={() => window.open(project.github, "_blank") }>
+                          <Github className="mr-2 h-4 w-4" />
+                          Code
+                        </Button>
+                        {project.demo && (
+                          <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90" onClick={() => window.open(project.demo, "_blank") }>
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Demo
+                          </Button>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
