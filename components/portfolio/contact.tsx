@@ -49,16 +49,16 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           {/* Contact Info */}
           <motion.div
             initial={false}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-6"
+            className="space-y-6 flex flex-col"
           >
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
+            <Card className="border-none shadow-lg h-full">
+              <CardContent className="p-6 h-full flex flex-col justify-start">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Mail className="h-5 w-5 text-primary" />
@@ -76,8 +76,8 @@ export function Contact() {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
+            <Card className="border-none shadow-lg h-full">
+              <CardContent className="p-6 h-full flex flex-col justify-start">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Github className="h-5 w-5 text-primary" />
@@ -97,8 +97,8 @@ export function Contact() {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-6">
+            <Card className="border-none shadow-lg h-full">
+              <CardContent className="p-6 h-full flex flex-col justify-start">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Linkedin className="h-5 w-5 text-primary" />
@@ -124,11 +124,11 @@ export function Contact() {
             initial={false}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="lg:col-span-2"
+            className="lg:col-span-2 flex"
           >
-            <Card className="border-none shadow-lg">
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
+            <Card className="border-none shadow-lg w-full">
+              <CardContent className="p-8 h-full flex flex-col">
+                <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Name
@@ -164,16 +164,18 @@ export function Contact() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
+                  <div className="mt-2 lg:mt-auto">
+                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isSubmitting}>
+                      {isSubmitting ? (
+                        "Sending..."
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" />
+                          Send Message
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
