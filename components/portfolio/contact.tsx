@@ -22,16 +22,41 @@ export function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+    const payload = {
+      name: String(formData.get('name') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      message: String(formData.get('message') || '').trim(),
+    }
 
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    })
+    if (!payload.name || !payload.email || !payload.message) {
+      toast({ title: 'Please fill all fields' })
+      setIsSubmitting(false)
+      return
+    }
 
-    setIsSubmitting(false)
-    ;(e.target as HTMLFormElement).reset()
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err?.error || 'Failed to send message')
+      }
+
+      toast({ title: 'Message sent!', description: "Thank you for reaching out. I'll get back to you soon." })
+      form.reset()
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+      toast({ title: 'Error', description: 'Failed to send message. Please try again later.' })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -59,7 +84,7 @@ export function Contact() {
           >
             <Card className="border-none shadow-lg h-full">
               <CardContent className="p-6 h-full flex flex-col justify-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
@@ -78,7 +103,7 @@ export function Contact() {
 
             <Card className="border-none shadow-lg h-full">
               <CardContent className="p-6 h-full flex flex-col justify-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Github className="h-5 w-5 text-primary" />
                   </div>
@@ -99,7 +124,7 @@ export function Contact() {
 
             <Card className="border-none shadow-lg h-full">
               <CardContent className="p-6 h-full flex flex-col justify-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Linkedin className="h-5 w-5 text-primary" />
                   </div>
