@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer'
-import { NextResponse } from 'next/server'
+import nodemailer from "nodemailer"
+import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
   try {
@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const { name, email, message } = data || {}
 
     if (!name || !email || !message) {
-      return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 })
     }
 
     const SMTP_HOST = process.env.SMTP_HOST
@@ -16,9 +16,10 @@ export async function POST(request: Request) {
     const SMTP_PASS = process.env.SMTP_PASS
     const FROM_EMAIL = process.env.FROM_EMAIL
     const OWNER_EMAIL = process.env.OWNER_EMAIL
+    const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "My Portfolio"
 
     if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !FROM_EMAIL || !OWNER_EMAIL) {
-      return NextResponse.json({ error: 'Email server not configured' }, { status: 500 })
+      return NextResponse.json({ error: "Email server not configured" }, { status: 500 })
     }
 
     const transporter = nodemailer.createTransport({
@@ -31,20 +32,101 @@ export async function POST(request: Request) {
       },
     })
 
+    /* ---------------- SOCIAL LINKS (REUSABLE) ---------------- */
+
+    const socialLinksHtml = `
+      <div style="margin-top:24px; text-align:center;">
+        <a href="https://github.com/tejaskapse1902" target="_blank"
+           style="margin:0 8px; text-decoration:none; color:#374151;">
+          🐙 GitHub
+        </a>
+        |
+        <a href="https://www.linkedin.com/in/tejas-kapse/" target="_blank"
+           style="margin:0 8px; text-decoration:none; color:#374151;">
+          💼 LinkedIn
+        </a>
+        |
+        <a href="mailto:tejaskapse19@gmail.com"
+           style="margin:0 8px; text-decoration:none; color:#374151;">
+          ✉️ Email
+        </a>
+      </div>
+    `
+
+    /* ---------------- OWNER EMAIL ---------------- */
+
     const ownerMail = {
       from: FROM_EMAIL,
       to: OWNER_EMAIL,
-      subject: `New contact from ${name}`,
-      text: `You have a new message from ${name} <${email}>:\n\n${message}`,
-      html: `<p><strong>From:</strong> ${name} &lt;${email}&gt;</p><p><strong>Message:</strong></p><p>${message}</p>`,
+      subject: `📩 New contact message from ${name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; background:#f9fafb; padding:24px;">
+          <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:8px; padding:24px;">
+            <h2 style="color:#6d28d9;">New Contact Message</h2>
+
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+
+            <hr style="margin:20px 0;" />
+
+            <p style="white-space:pre-line;">${message}</p>
+
+            <hr style="margin:20px 0;" />
+
+            ${socialLinksHtml}
+
+            <p style="font-size:12px; color:#6b7280; margin-top:16px; text-align:center;">
+              Sent from your portfolio contact form.
+            </p>
+          </div>
+        </div>
+      `,
     }
+
+    /* ---------------- USER CONFIRMATION EMAIL ---------------- */
 
     const clientMail = {
       from: FROM_EMAIL,
       to: email,
-      subject: `Thanks for contacting ${process.env.NEXT_PUBLIC_SITE_NAME || 'me'}`,
-      text: `Hi ${name},\n\nThanks for reaching out. I've received your message and will get back to you soon.\n\n—`,
-      html: `<p>Hi ${name},</p><p>Thanks for reaching out. I've received your message and will get back to you soon.</p><p>—</p>`,
+      subject: `Thanks for contacting ${SITE_NAME} 👋`,
+      html: `
+        <div style="font-family: Arial, sans-serif; background:#f9fafb; padding:24px;">
+          <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:8px; padding:24px;">
+            <h2 style="color:#6d28d9;">Thanks for reaching out, ${name} 👋</h2>
+
+            <p>
+              I’ve received your message and will get back to you as soon as possible.
+            </p>
+
+            <div style="background:#f3f4f6; padding:16px; border-radius:6px; margin:20px 0;">
+              <p style="margin:0; font-size:14px; color:#374151;">
+                <strong>Your Message:</strong>
+              </p>
+              <p style="white-space:pre-line; font-size:14px;">
+                ${message}
+              </p>
+            </div>
+
+            <p>
+              In the meantime, feel free to explore my work or connect with me:
+            </p>
+
+            ${socialLinksHtml}
+
+            <p style="margin-top:24px;">
+              Best regards,<br />
+              <strong>Tejas Kapse</strong><br />
+              Full Stack & Backend Developer
+            </p>
+
+            <hr style="margin:24px 0;" />
+
+            <p style="font-size:12px; color:#6b7280; text-align:center;">
+              This is an automated confirmation email. Please do not reply.
+            </p>
+          </div>
+        </div>
+      `,
     }
 
     await transporter.sendMail(ownerMail)
@@ -52,8 +134,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true })
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('Mail send error', err)
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+    console.error("Mail send error:", err)
+    return NextResponse.json({ error: "Failed to send email" }, { status: 500 })
   }
 }
