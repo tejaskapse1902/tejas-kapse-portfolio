@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { ArrowDown, Download, Mail, Github, Linkedin } from "lucide-react"
+import { ArrowDown, Download, Mail, Github, Linkedin, FolderGit2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import profile from "../../public/images/profile.png"
 
@@ -64,10 +64,12 @@ export function Hero() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-4 lg:mb-6">
               <Button
                 size="lg"
+                variant="secondary"
                 onClick={() => handleScroll("#projects")}
                 className="bg-primary hover:bg-primary/95 text-primary-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 aria-label="View Projects"
               >
+                <FolderGit2 className="mr-2 h-4 w-4" />
                 View Projects
               </Button>
 
