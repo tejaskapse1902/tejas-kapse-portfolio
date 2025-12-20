@@ -201,8 +201,10 @@ export function About() {
                 <Card className="border-none shadow-md hover:shadow-xl transition-all h-full">
                   <CardContent className="p-5 sm:p-6">
                     <div className="flex gap-4">
-                      <div className="p-3 bg-primary/10 rounded-lg">
+                      <div>
+                        <div className="p-3 bg-primary/10 rounded-lg">
                         <item.icon className="h-5 w-5 text-primary" />
+                      </div>
                       </div>
                       <div>
                         <h3 className="font-semibold mb-1">
