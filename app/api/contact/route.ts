@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       const logoHeader = LOGO_URL
   ? `
     <div class="logo-wrapper">
-  <img src="/logo.png" alt="Logo" class="logo-image" />
+  <img src="{LOGO_URL}" alt="Logo" class="logo-image" />
 </div>
 
   `
