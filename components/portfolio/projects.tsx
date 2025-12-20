@@ -66,13 +66,13 @@ export function Projects() {
   const miniProjects = projects.slice(3)
 
   return (
-    <section id="projects" ref={ref} className="py-20 md:py-32 bg-muted/30">
+    <section id="projects" ref={ref} className="py-7 md:py-15 bg-muted/30">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Projects</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance">
@@ -83,7 +83,7 @@ export function Projects() {
         <div className="max-w-6xl mx-auto">
           {/* Major Projects */}
           <div className="mb-10">
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Major Projects</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-3">Major Projects</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {majorProjects.map((project, index) => (
                 <motion.div
@@ -144,7 +144,7 @@ export function Projects() {
 
           {/* Mini Projects */}
           <div>
-            <h3 className="text-2xl font-semibold text-foreground mb-4">Mini Projects</h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-3">Mini Projects</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {miniProjects.map((project, index) => (
                 <motion.div

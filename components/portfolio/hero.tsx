@@ -85,7 +85,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => window.open("/TejasKapse_Resume.pdf", "_blank") }
+                onClick={() => window.open("/documents/TejasKapse_Resume.pdf", "_blank") }
                 aria-label="Download Resume"
                 className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >

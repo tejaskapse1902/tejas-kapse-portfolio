@@ -135,3 +135,41 @@
     max-width: 1100px;
   }
 }
+
+
+/* Logo wrapper styles */
+.logo-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 28px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #020b24, #04113a);
+  border: 2px solid rgba(52, 211, 153, 0.9);
+  box-shadow:
+    0 0 12px rgba(52, 211, 153, 0.35),
+    inset 0 0 18px rgba(52, 211, 153, 0.15);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.logo-image {
+  max-width: 420px;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+}
+
+.logo-wrapper:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow:
+    0 0 24px rgba(52, 211, 153, 0.6),
+    inset 0 0 28px rgba(52, 211, 153, 0.25);
+}
+
+@media (max-width: 640px) {
+  .logo-image {
+    max-width: 280px;
+  }
+}

@@ -5,14 +5,15 @@ import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Briefcase, Calendar } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Briefcase, Calendar, Eye } from "lucide-react"
 
 const experiences = [
   {
     role: "Full Stack Developer Intern",
     company: "Hasten Solution",
-    period: "2024",
-    location: "Remote",
+    period: "2023 - 2024",
+    location: "In Office",
     description: [
       "Developed and maintained web applications using ASP.NET MVC framework",
       "Optimized SQL Server database queries improving performance by 30%",
@@ -20,7 +21,8 @@ const experiences = [
       "Implemented RESTful APIs for seamless frontend-backend integration",
       "Participated in code reviews and agile development practices",
     ],
-    technologies: ["ASP.NET MVC", "C#", "SQL Server", "Git", "REST API"],
+    technologies: ["ASP.NET MVC", "C#", "SQL Server", "Git", "REST API", "JavaScript", "HTML", "CSS", "Bootstrap", "AJAX", "jQuery"],
+    certificateFile: "internship-certificate.pdf",
   },
 ]
 
@@ -29,13 +31,13 @@ export function Experience() {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section id="experience" ref={ref} className="py-20 md:py-32">
+    <section id="experience" ref={ref} className="py-7 md:py-15">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Work Experience</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance">
@@ -88,6 +90,20 @@ export function Experience() {
                       </Badge>
                     ))}
                   </div>
+
+                  {experience.certificateFile && (
+                    <div className="mt-4">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => window.open(`/documents/${experience.certificateFile}`, '_blank')}
+                        aria-label="View internship certificate"
+                      >
+                        <Eye className="mr-2 h-4 w-4" />
+                        View Internship Certificate
+                      </Button>
+                    </div>
+                  )}  
                 </CardContent>
               </Card>
             </motion.div>

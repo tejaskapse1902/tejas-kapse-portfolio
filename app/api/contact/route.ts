@@ -17,6 +17,8 @@ export async function POST(request: Request) {
     const FROM_EMAIL = process.env.FROM_EMAIL
     const OWNER_EMAIL = process.env.OWNER_EMAIL
     const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "My Portfolio"
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || ""
+    const LOGO_URL = SITE_URL ? `${SITE_URL}/logo.png` : ""
 
     if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !FROM_EMAIL || !OWNER_EMAIL) {
       return NextResponse.json({ error: "Email server not configured" }, { status: 500 })
@@ -36,6 +38,11 @@ export async function POST(request: Request) {
 
     const socialLinksHtml = `
       <div style="margin-top:24px; text-align:center;">
+        <a href="${SITE_URL}" target="_blank"
+          style="margin:0 8px; text-decoration:none; color:#374151;">
+          🌐 Portfolio
+        </a>
+        |
         <a href="https://github.com/tejaskapse1902" target="_blank"
            style="margin:0 8px; text-decoration:none; color:#374151;">
           🐙 GitHub
@@ -53,6 +60,17 @@ export async function POST(request: Request) {
       </div>
     `
 
+    /* ---------------- LOGO HEADER (REUSABLE) ---------------- */
+      const logoHeader = LOGO_URL
+  ? `
+    <div class="logo-wrapper">
+  <img src="/logo.png" alt="Logo" class="logo-image" />
+</div>
+
+  `
+  : ""
+
+
     /* ---------------- OWNER EMAIL ---------------- */
 
     const ownerMail = {
@@ -60,6 +78,7 @@ export async function POST(request: Request) {
       to: OWNER_EMAIL,
       subject: `📩 New contact message from ${name}`,
       html: `
+        ${logoHeader}
         <div style="font-family: Arial, sans-serif; background:#f9fafb; padding:24px;">
           <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:8px; padding:24px;">
             <h2 style="color:#6d28d9;">New Contact Message</h2>
@@ -90,6 +109,7 @@ export async function POST(request: Request) {
       to: email,
       subject: `Thanks for contacting ${SITE_NAME} 👋`,
       html: `
+      ${logoHeader}
         <div style="font-family: Arial, sans-serif; background:#f9fafb; padding:24px;">
           <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:8px; padding:24px;">
             <h2 style="color:#6d28d9;">Thanks for reaching out, ${name} 👋</h2>
