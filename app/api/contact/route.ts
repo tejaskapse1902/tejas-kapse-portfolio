@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const OWNER_EMAIL = process.env.OWNER_EMAIL
     const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "My Portfolio"
     const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || ""
-    const LOGO_URL = SITE_URL ? `${SITE_URL}/logo.png` : ""
+    const LOGO_URL = SITE_URL ? `${SITE_URL}logo.png` : ""
 
     if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !FROM_EMAIL || !OWNER_EMAIL) {
       return NextResponse.json({ error: "Email server not configured" }, { status: 500 })
@@ -61,12 +61,36 @@ export async function POST(request: Request) {
     `
 
     /* ---------------- LOGO HEADER (REUSABLE) ---------------- */
-      const logoHeader = LOGO_URL
+     const logoHeader = LOGO_URL
   ? `
-    <div class="logo-wrapper">
-  <img src="{LOGO_URL}" alt="Logo" class="logo-image" />
-</div>
-
+    <div style="
+      text-align:center;
+      margin-bottom:24px;
+    ">
+      <div style="
+        
+        
+        
+        padding:5px 5px;
+        border-radius:18px;
+        background:linear-gradient(135deg,#020b24,#04113a);
+        border:3px solid rgba(52,211,153,0.9);
+        box-shadow:
+          0 0 12px rgba(52,211,153,0.35),
+          inset 0 0 18px rgba(52,211,153,0.15);
+      ">
+        <img
+          src="${LOGO_URL}"
+          alt="Logo"
+          style="
+            max-width:100%;
+            height:auto;
+            display:block;
+            border-radius:18px;
+          "
+        />
+      </div>
+    </div>
   `
   : ""
 
