@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github } from "lucide-react"
 
-const projects = [
+const majorProjects = [
   {
     title: "Fruits & Vegetables Recognition",
     description:
@@ -16,6 +16,7 @@ const projects = [
     tech: ["Python", "TensorFlow", "Keras", "CNN", "Streamlit"],
     github: "#",
     demo: "#",
+    image: "/images/project-1.svg",
   },
   {
     title: "Programming Prep Web App",
@@ -24,6 +25,7 @@ const projects = [
     tech: ["React", "Firebase", "Clerk", "JavaScript", "CSS"],
     github: "#",
     demo: "#",
+    image: "/images/project-2.svg",
   },
   {
     title: "Daily Mess Service",
@@ -31,6 +33,19 @@ const projects = [
       "Desktop application for mess management with attendance tracking, meal planning, and billing. Built using Java Swing with MySQL database integration.",
     tech: ["Java", "Java Swing", "MySQL", "JDBC"],
     github: "#",
+    image: "/images/project-3.svg"
+  },
+]
+
+const miniProjects = [
+  {
+    title: "🔐 OTP Verification System — Python + Streamlit + SMTP",
+    description:
+      "OTP Verification System is a Python-based authentication project that generates and sends secure 6-digit OTPs via email using SMTP. Built with Streamlit, it features an interactive UI, session-based OTP validation, and error handling for reliable verification workflows.",
+    tech: ["Python", "Streamlit", "SMTP (smtplib)", "python-dotenv", "MIMEText"],
+    github: "https://github.com/tejaskapse1902/otp-verification-system",
+    demo: "https://otp-verification-system-python.streamlit.app/",
+    image: "/images/otp-verification-project.png"
   },
   {
     title: "Currency Converter",
@@ -39,6 +54,7 @@ const projects = [
     tech: ["JavaScript", "HTML", "CSS", "API Integration"],
     github: "#",
     demo: "#",
+    image: "/images/project-2.svg"
   },
   {
     title: "Weather Application",
@@ -47,6 +63,7 @@ const projects = [
     tech: ["JavaScript", "HTML", "CSS", "REST API"],
     github: "#",
     demo: "#",
+    image: "/images/project-3.svg"
   },
   {
     title: "Image Gallery",
@@ -55,15 +72,13 @@ const projects = [
     tech: ["JavaScript", "HTML", "CSS", "Responsive Design"],
     github: "#",
     demo: "#",
+    image: "/images/project-1.svg"
   },
 ]
 
 export function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
-
-  const majorProjects = projects.slice(0, 3)
-  const miniProjects = projects.slice(3)
 
   return (
     <section id="projects" ref={ref} className="py-7 md:py-15 bg-muted/30">
@@ -84,10 +99,11 @@ export function Projects() {
           {/* Major Projects */}
           <div className="mb-10">
             <h3 className="text-2xl font-semibold text-foreground mb-3">Major Projects</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {majorProjects.map((project, index) => (
                 <motion.div
                   key={project.title}
+                  className="w-full md:w-[48%] lg:w-[31%]"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -95,7 +111,7 @@ export function Projects() {
                   <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden">
                     <div className="h-40 w-full overflow-hidden">
                       <img
-                        src={`/images/project-${(index % 3) + 1}.svg`}
+                        src={project.image}
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />
@@ -145,10 +161,11 @@ export function Projects() {
           {/* Mini Projects */}
           <div>
             <h3 className="text-2xl font-semibold text-foreground mb-3">Mini Projects</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {miniProjects.map((project, index) => (
                 <motion.div
                   key={project.title}
+                  className="w-full md:w-[48%] lg:w-[31%]"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.45, delay: index * 0.08 }}
@@ -156,7 +173,7 @@ export function Projects() {
                   <Card className="border-none shadow-md hover:shadow-lg transition-all duration-200 h-full flex flex-col group overflow-hidden">
                     <div className="h-32 w-full overflow-hidden">
                       <img
-                        src={`/images/project-${((index + 3) % 3) + 1}.svg`}
+                        src={project.image}
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />

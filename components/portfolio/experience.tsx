@@ -10,7 +10,22 @@ import { Briefcase, Calendar, Eye } from "lucide-react"
 
 const experiences = [
   {
-    role: "Full Stack Developer Intern",
+    role: "AI ML Intern",
+    company: "Elite Associate",
+    period: "Jan 2026 - Present",
+    location: "In Office",
+    description: [
+      "Built an AI-based recommendation system to match people with suitable job opportunities.",
+      "Organized and cleaned resume information and job details to improve matching results.",
+      "Developed backend features to manage and store application data efficiently.",
+      "Created automated workflows using n8n for resume processing, scoring, and system integrations.",
+      "Worked with team members to turn business needs into practical AI solutions and automated processes.",
+    ],
+    technologies: ["Python", "FastAPI", "Machine Learning", "Hugging Face", "Vector Embeddings", "Git", "n8n", "MongoDB", "Docker"],
+    certificateFile: "internship-offerletter-alml.pdf",
+  },
+  {
+    role: "Dot Net Full Stack Developer Intern",
     company: "Hasten Solution",
     period: "2023 - 2024",
     location: "In Office",
@@ -22,7 +37,7 @@ const experiences = [
       "Participated in code reviews and agile development practices",
     ],
     technologies: ["ASP.NET MVC", "C#", "SQL Server", "Git", "REST API", "JavaScript", "HTML", "CSS", "Bootstrap", "AJAX", "jQuery"],
-    certificateFile: "internship-certificate.pdf",
+    certificateFile: "internship-certificate-dotnet.pdf",
   },
 ]
 
@@ -53,7 +68,7 @@ export function Experience() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+              <Card className="border-none shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group mb-8">
                 {/* Accent Bar */}
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary group-hover:w-2 transition-all duration-300" />
 
