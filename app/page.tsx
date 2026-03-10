@@ -10,6 +10,7 @@ import { Contact } from "@/components/portfolio/contact"
 import { Navbar } from "@/components/portfolio/navbar"
 import { Footer } from "@/components/portfolio/footer"
 import { ScrollToTop } from "@/components/portfolio/scroll-to-top"
+import { ChatbotWidget } from "@/components/portfolio/chatbot-widget"
 
 export default function PortfolioPage() {
   return (
@@ -25,6 +26,7 @@ export default function PortfolioPage() {
         <Contact />
       </main>
       <Footer />
+      <ChatbotWidget />
       <ScrollToTop />
     </div>
   )
